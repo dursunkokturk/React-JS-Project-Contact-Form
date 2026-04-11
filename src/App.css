@@ -64,11 +64,17 @@ form h1 {
   border-radius: 5px;
   padding-top: 12px;
   padding-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .query-types input {
   margin-left: 24px;
   margin-right: 12px;
+}
+
+.query-options {
+  display: flex;
+  flex-direction: column;
 }
 
 .message {
@@ -87,9 +93,14 @@ form h1 {
   padding-left: 10px;
 }
 
+.message .error {
+  margin-top: 5px;
+}
+
 .check {
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
   margin-bottom: 40px;
 }
 
@@ -97,6 +108,16 @@ form h1 {
   width: 24px;
   height: 24px;
   margin-right: 16px;
+}
+
+.check h4 {
+  flex: 1;
+}
+
+.check .error {
+  width: 100%;
+  margin-left: 40px;
+  margin-top: 5px;
 }
 
 button {
@@ -170,6 +191,18 @@ button {
   margin-inline: 16px;
 }
 
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: -16px;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.error-input {
+  border: 2px solid red !important;
+}
+
 @media(width > 767px) {
   .firstname-and-lastname {
     display: flex;
@@ -204,6 +237,7 @@ button {
 
   .query-options {
     display: flex;
+    flex-direction: row;
     gap: 16px;
   }
 
@@ -222,6 +256,10 @@ button {
     margin-inline: 260px;
   }
 
+  .query-type {
+    margin-bottom: 24px;
+  }
+
   .user-information input,
   .query-types,
   .check,
@@ -234,6 +272,7 @@ button {
   textarea:focus {
     cursor: text;
   }
+
   .query-types:hover {
     border-color: #0C7D69;
   }
@@ -248,6 +287,10 @@ button {
     outline: none;
     border: 2px solid #0C7D69;
     box-shadow: 0 0 0 3px rgba(12, 125, 105, 0.2);
+  }
+
+  .message .error {
+    margin-top: 5px;
   }
 
   button:has:checked {
