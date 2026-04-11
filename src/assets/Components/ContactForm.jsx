@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import '../../App.css'
 
 export default function ContactForm() {
@@ -36,6 +36,19 @@ export default function ContactForm() {
       [name]: ""
     }));
   }
+
+  // Gonder Butonuna Tiklandiginda 
+  // Ekranda Gorunecek 
+  // Bilgilendirme Mesajini Suresini Belirliyoruz
+  useEffect(() => {
+    if (submit) {
+      const timer = setTimeout(() => {
+        setSubmit(false);
+      }, 5000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [submit]);
 
   // Form Uzerindeki Alanlarin Doluluk Kontrolunu Yapiyoruz
   function validate() {
@@ -86,8 +99,23 @@ export default function ContactForm() {
       return;
     }
 
+    // Kullanicidan Alinan Veriyi Yazdiriyoruz
+    console.log("Gönderilen Veriler:", formData);
+
     setErrors({});
     setSubmit(true);
+
+    // Kullanici Bilgileri Girdikten Sonra 
+    // Gonder Butonuna Tikladiginda 
+    // Formda Girilen Bilgileri Sifirliyoruz
+    setFormData({
+      firstName: "",
+      lastName: "",
+      email: "",
+      query: "",
+      message: "",
+      consent: false
+    });
   }
 
   return (
@@ -96,8 +124,11 @@ export default function ContactForm() {
         <div className="form-wrapper">
           {submit && (
             <div className='success-message'>
-              <h1>Mesaj Gönderildi</h1>
-              <h4>Formu doldurduğunuz için teşekkür ederiz. Yakında sizinle iletişime geçeceğiz!</h4>
+              <div className="success-title">
+                <span className='success-icon'>✓</span>
+                <h1>Mesaj Gönderildi</h1>
+                <h4>Formu doldurduğunuz için teşekkür ederiz. Yakında sizinle iletişime geçeceğiz!</h4>
+              </div>
             </div>
           )}
           <form onSubmit={handleSubmit}>
