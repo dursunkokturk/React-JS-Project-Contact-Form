@@ -32,6 +32,13 @@ form h1 {
   margin-bottom: 32px;
 }
 
+input:focus,
+textarea:focus {
+  outline: none;
+  border: 2px solid #0C7D69;
+  box-shadow: 0 0 0 3px rgba(12, 125, 105, 0.2);
+}
+
 .user-information {
   font-size: 16px;
 
@@ -72,9 +79,18 @@ form h1 {
   margin-right: 12px;
 }
 
+.query-types:hover {
+  border-color: #0C7D69;
+}
+
 .query-options {
   display: flex;
   flex-direction: column;
+}
+
+.query-types:has(input[type="radio"]:checked) {
+  border: 2px solid #0C7D69;
+  background-color: #E0F1E8;
 }
 
 .message {
@@ -132,6 +148,15 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+button:hover {
+  background-color: #0A6B5A;
+  cursor: pointer;
+}
+
+button:active {
+  background-color: #085c4d;
 }
 
 .success-message {
@@ -201,6 +226,10 @@ button {
 
 .error-input {
   border: 2px solid red !important;
+}
+
+.error-radio .query-types {
+  border: 2px solid red;
 }
 
 @media(width > 767px) {
@@ -273,28 +302,18 @@ button {
     cursor: text;
   }
 
-  .query-types:hover {
-    border-color: #0C7D69;
-  }
 
-  .query-types:has(input[type="radio"]:checked) {
-    border: 2px solid #0C7D69;
-    background-color: #E0F1E8;
-  }
 
-  input:focus,
-  textarea:focus {
-    outline: none;
-    border: 2px solid #0C7D69;
-    box-shadow: 0 0 0 3px rgba(12, 125, 105, 0.2);
-  }
+
+
+
 
   .message .error {
     margin-top: 5px;
   }
 
-  button:has:checked {
+  /* button:has:checked {
     border: 2px solid #0C7D69;
     background-color: #E0F1E8;
-  }
+  } */
 }

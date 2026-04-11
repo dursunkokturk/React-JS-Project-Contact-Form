@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import '../../App'
+import { useState } from 'react'
+import '../../App.css'
 
 export default function ContactForm() {
 
@@ -19,6 +19,8 @@ export default function ContactForm() {
   // Kullanicinin Doldurmasi Gereken Alanlar Bos Ise Hata Mesaji Veriyoruz
   const [errors, setErrors] = useState({});
 
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
   // Form Uzerindeki Tum Alanlari Kontrol Ediyoruz
   function handleChange(e) {
     const { name, value, type, checked } = e.target;
@@ -26,6 +28,12 @@ export default function ContactForm() {
     setFormData(prev => ({
       ...prev,
       [name]: type === "checkbox" ? checked : value
+    }));
+
+    // Kullanicinin Veri Girmeye Basladigi Alanın Hatasini Temizliyoruz
+    setErrors(prev => ({
+      ...prev,
+      [name]: ""
     }));
   }
 
@@ -43,6 +51,8 @@ export default function ContactForm() {
 
     if (!formData.email.trim()) {
       newErrors.email = "Bu Alan Boş Bırakılamaz";
+    } else if (!emailRegex.test(formData.email)) {
+      newErrors.email = "Geçerli Bir E-Mail Adresi Giriniz";
     }
 
     if (!formData.query) {
@@ -61,11 +71,11 @@ export default function ContactForm() {
   }
 
   // Gonder Butonuna Tiklandiginda Yapilacak Islem
-  useEffect(() => {
-    if (submit) {
-      console.log("Mesaj Gönderildi");
-    }
-  }, [submit])
+  // useEffect(() => {
+  //   if (submit) {
+  //     console.log("Mesaj Gönderildi");
+  //   }
+  // }, [submit])
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -102,8 +112,9 @@ export default function ContactForm() {
                     value={formData.firstName}
                     onChange={handleChange}
                     placeholder='Adınızı Giriniz'
+                    className={errors.firstName ? "error-input" : ""}
                   />
-                  {errors.firstName && <span className="error">{errors.firstName}</span>}
+                  {errors.firstName && <span className="error">{errors.firstName ? 'Bu Alan Boş Bırakılamaz' : ''}</span>}
                 </div>
                 <div className='user-information'>
                   <h4>Soyadınız</h4>
@@ -113,8 +124,9 @@ export default function ContactForm() {
                     value={formData.lastName}
                     onChange={handleChange}
                     placeholder='Soyadınızı Giriniz'
+                    className={errors.lastName ? "error-input" : ""}
                   />
-                  {errors.lastName && <span className="error">{errors.lastName}</span>}
+                  {errors.lastName && <span className="error">{errors.lastName ? 'Bu Alan Boş Bırakılamaz' : ''}</span>}
                 </div>
               </div>
               <div className='user-information'>
@@ -125,16 +137,20 @@ export default function ContactForm() {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder='E-Mail Adresiniz Giriniz'
+                  className={errors.email ? "error-input" : ""}
                 />
                 {errors.email && <span className="error">{errors.email}</span>}
               </div>
               <div className='query-type'>
                 <h4>Sorgu Türü</h4>
-                <div className="query-options">
+                <div className={`query-options ${errors.query ? "error-radio" : ""}`}>
                   <label className='query-types'>
                     <input
                       type="radio"
                       name='query'
+                      value="genel"
+                      checked={formData.query === "genel"}
+                      onChange={handleChange}
                     />
                     Genel Sorular
                   </label>
@@ -142,10 +158,14 @@ export default function ContactForm() {
                     <input
                       type="radio"
                       name='query'
+                      value="destek"
+                      checked={formData.query === "destek"}
+                      onChange={handleChange}
                     />
                     Destek Talebi
                   </label>
                 </div>
+                {errors.query && <span className="error">{errors.query}</span>}
               </div>
               <div className='message'>
                 <h4>Mesaj</h4>
@@ -153,6 +173,7 @@ export default function ContactForm() {
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
+                  className={errors.message ? "error-input" : ""}
                   id=""
                   rows={10}
                 ></textarea>
