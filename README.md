@@ -135,14 +135,13 @@ Live Preview
 | Message         | Textarea |    ✅    |    —                        |
 | Contact Consent | Checkbox |    ✅    |    —                        |
 
-Responsive Layouts
-ScreenWidthKey ChangesMobile375px DefaultSingle column, vertical form flowTablet> 767pxFirst and last name side by side, query types horizontalDesktop> 1109pxForm centered, wide margins
+## Responsive Layouts
 
-| Ekran    | Genişlik         | Öne Çıkan Değişiklikler                   |
-| -------- |------------------| ------------------------------------------|
-| Mobil    | 375px Varsayılan | Tek sütun, dikey form akışı               |
-| Tablet   | > 767px          | Ad ve Soyad yan yana, sorgu türleri yatay |
-| Masaüstü | > 1109px         | Form ortalanmış, geniş kenar boşlukları   |
+| Screen  | Width         | Key Changes                                              |
+| ------- |---------------| ---------------------------------------------------------|
+| Mobile  | 375px Default | Single column, vertical form flow                        |
+| Tablet  | > 767px       | First and last name side by side, query types horizontal |
+| Desktop | > 1109px      | Form centered, wide margins                              |
 
 ## Technologies
 
